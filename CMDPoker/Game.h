@@ -248,6 +248,7 @@ void SinglePlayer() {
 	{
 #pragma region Blinds
 		t.Refresh();
+		t.PrintDetails();
 		for (int i = 0; i < NoP; i++)
 		{
 			playerBets[i] = 0;
@@ -260,6 +261,7 @@ void SinglePlayer() {
 		if (t.GetPlayers()[CurrentPlayer]->GetMoney() < 20) {
 			t.GetPlayers()[CurrentPlayer]->SetBet(0);
 			t.GetPlayers()[CurrentPlayer]->SetActive(0);
+			t.GetPlayers()[CurrentPlayer]->SetMoney(0);
 		}
 		else {
 			Bet(t, playerBets, 20, CurrentPlayer);
@@ -271,6 +273,7 @@ void SinglePlayer() {
 		if (t.GetPlayers()[CurrentPlayer]->GetMoney() < 40) {
 			t.GetPlayers()[CurrentPlayer]->SetBet(0);
 			t.GetPlayers()[CurrentPlayer]->SetActive(0);
+			t.GetPlayers()[CurrentPlayer]->SetMoney(0);
 		}
 		else {
 			Bet(t, playerBets, 40, CurrentPlayer);
