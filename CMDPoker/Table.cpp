@@ -35,6 +35,7 @@ inline void Table::Refresh() {
 	maxbet = 0;
 	dealer++;
 	stage = 1;
+	NoPr = NoPa;
 	StandardDeck();
 	Shuffle();
 	CardsInGame = 0;
