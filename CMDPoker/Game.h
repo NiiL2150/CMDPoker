@@ -54,12 +54,21 @@ void GameSettings(int& NoP, string& name, int& defaultMoney) {
 	pos = { 60, 12 };
 	SetConsoleCursorPosition(hConsole, pos);
 	cin >> NoP;
+	if (NoP > 6) {
+		NoP = 6;
+	}
+	if (NoP < 2) {
+		NoP = 2;
+	}
 	pos = { 61, 16 };
 	SetConsoleCursorPosition(hConsole, pos);
 	cin >> name;
 	pos = { 56, 20 };
 	SetConsoleCursorPosition(hConsole, pos);
 	cin >> defaultMoney;
+	if (defaultMoney < 100) {
+		defaultMoney = 100;
+	}
 
 	system("cls");
 }
