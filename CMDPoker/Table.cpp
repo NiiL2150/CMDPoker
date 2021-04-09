@@ -255,6 +255,9 @@ inline void Table::PrintDetails() {
 	cout << players[pl]->GetName();
 	pos = { 70, 19 };
 	SetConsoleCursorPosition(hConsole, pos);
+	cout << "          ";
+	pos = { 70, 19 };
+	SetConsoleCursorPosition(hConsole, pos);
 	cout << players[pl]->GetMoney();
 	pos = { 68, 20 };
 	SetConsoleCursorPosition(hConsole, pos);
@@ -284,10 +287,34 @@ inline void Table::PrintDetails() {
 		players[pl]->GetHand()[1].PrintFifthRow(ch);
 	}
 	else if (players[pl]->GetActive()) {
-		cout << "Player Folded";
+		cout << "Folded     ";
+		pos = { 68, 21 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
+		pos = { 68, 22 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
+		pos = { 68, 23 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
+		pos = { 68, 24 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
 	}
 	else {
-		cout << "Player Lost";
+		cout << "Lost       ";
+		pos = { 68, 21 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
+		pos = { 68, 22 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
+		pos = { 68, 23 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
+		pos = { 68, 24 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "           ";
 	}
 
 	if (NoP >= 2) {
@@ -301,6 +328,9 @@ inline void Table::PrintDetails() {
 		pos = { 40 , 18 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetName();
+		pos = { 40, 19 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "          ";
 		pos = { 40, 19 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetMoney();
@@ -332,10 +362,34 @@ inline void Table::PrintDetails() {
 			players[pl]->GetHand()[1].PrintFifthRow(ch);
 		}
 		else if (players[pl]->GetActive()) {
-			cout << "Player Folded";
+			cout << "Folded     ";
+			pos = { 38, 21 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 22 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 23 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 24 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 		else {
-			cout << "Player Lost";
+			cout << "Lost       ";
+			pos = { 38, 21 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 22 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 23 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 24 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 	}
 
@@ -350,6 +404,9 @@ inline void Table::PrintDetails() {
 		pos = { 6 , 8 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetName();
+		pos = { 6, 9 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "          ";
 		pos = { 6, 9 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetMoney();
@@ -381,10 +438,34 @@ inline void Table::PrintDetails() {
 			players[pl]->GetHand()[1].PrintFifthRow(ch);
 		}
 		else if (players[pl]->GetActive()) {
-			cout << "Player Folded";
+			cout << "Folded     ";
+			pos = { 4, 11 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 4, 12 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 4, 13 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 4, 14 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 		else {
-			cout << "Player Lost";
+			cout << "Lost       ";
+			pos = { 4, 11 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 4, 12 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 4, 13 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 4, 14 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 	}
 
@@ -399,6 +480,9 @@ inline void Table::PrintDetails() {
 		pos = { 40 , 0 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetName();
+		pos = { 40, 1 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "          ";
 		pos = { 40, 1 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetMoney();
@@ -430,10 +514,34 @@ inline void Table::PrintDetails() {
 			players[pl]->GetHand()[1].PrintFifthRow(ch);
 		}
 		else if (players[pl]->GetActive()) {
-			cout << "Player Folded";
+			cout << "Folded     ";
+			pos = { 38, 3 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 4 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 5 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 6 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 		else {
-			cout << "Player Lost";
+			cout << "Lost       ";
+			pos = { 38, 3 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 4 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 5 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 38, 6 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 	}
 
@@ -448,6 +556,9 @@ inline void Table::PrintDetails() {
 		pos = { 70 , 0 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetName();
+		pos = { 70, 1 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "          ";
 		pos = { 70, 1 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetMoney();
@@ -479,10 +590,34 @@ inline void Table::PrintDetails() {
 			players[pl]->GetHand()[1].PrintFifthRow(ch);
 		}
 		else if (players[pl]->GetActive()) {
-			cout << "Player Folded";
+			cout << "Folded     ";
+			pos = { 68, 3 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 68, 4 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 68, 5 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 68, 6 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 		else {
-			cout << "Player Lost";
+			cout << "Lost       ";
+			pos = { 68, 3 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 68, 4 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 68, 5 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 68, 6 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 	}
 
@@ -497,6 +632,9 @@ inline void Table::PrintDetails() {
 		pos = { 106 , 8 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetName();
+		pos = { 106, 9 };
+		SetConsoleCursorPosition(hConsole, pos);
+		cout << "          ";
 		pos = { 106, 9 };
 		SetConsoleCursorPosition(hConsole, pos);
 		cout << players[pl]->GetMoney();
@@ -528,16 +666,42 @@ inline void Table::PrintDetails() {
 			players[pl]->GetHand()[1].PrintFifthRow(ch);
 		}
 		else if (players[pl]->GetActive()) {
-			cout << "Player Folded";
+			cout << "Folded     ";
+			pos = { 104, 11 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 104, 12 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 104, 13 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 104, 14 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 		else {
-			cout << "Player Lost";
+			cout << "Lost       ";
+			pos = { 104, 11 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 104, 12 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 104, 13 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
+			pos = { 104, 14 };
+			SetConsoleCursorPosition(hConsole, pos);
+			cout << "           ";
 		}
 	}
 	pos = { 58, 9 };
 	SetConsoleCursorPosition(hConsole, pos);
-	cout << GREENB << BLACK << pot << "$" << RESET;
+	cout << GREENB << "              " << RESET;
+	pos = { 58, 9 };
 	SetConsoleCursorPosition(hConsole, pos);
+	cout << GREENB << BLACK << pot << "$" << RESET;
 }
 
 inline void Table::PrintControls(short ch, int maxmoney)
@@ -682,6 +846,11 @@ inline void Table::SetPot(int _pot) {
 }
 inline int Table::GetPot() const {
 	return pot;
+}
+
+inline Card* Table::GetGlobal() const
+{
+	return global;
 }
 
 inline void Table::SetMaxBet(int _maxbet)

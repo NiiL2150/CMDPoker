@@ -41,6 +41,8 @@ public:
 	void SetPot(int _pot);
 	int GetPot() const;
 
+	Card* GetGlobal() const;
+
 	void SetMaxBet(int _maxbet);
 	int GetMaxBet() const;
 

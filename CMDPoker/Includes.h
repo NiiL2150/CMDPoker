@@ -7,6 +7,7 @@
 #include <conio.h>
 #include <vector>
 #include <tchar.h>
+#include <algorithm>
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #define RESET   "\033[0m"
