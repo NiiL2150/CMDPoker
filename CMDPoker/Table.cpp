@@ -788,6 +788,9 @@ inline void Table::PrintControls(short ch, int maxmoney)
 
 	pos = { 48, 27 };
 	SetConsoleCursorPosition(hConsole, pos);
+	cout << "                         ";
+	pos = { 48, 27 };
+	SetConsoleCursorPosition(hConsole, pos);
 	cout << GREENB << BLACK << maxmoney << "$" << RESET;
 }
 
