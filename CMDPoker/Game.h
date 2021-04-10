@@ -272,8 +272,9 @@ void SinglePlayer() {
 			t.GetPlayers()[CurrentPlayer]->SetBet(0);
 			t.GetPlayers()[CurrentPlayer]->SetActive(0);
 			t.GetPlayers()[CurrentPlayer]->SetMoney(0);
-			t.SetNoP(t.GetNoP() - 1);
-			if (t.GetNoP() == 1) {
+			t.SetNoPr(t.GetNoPr() - 1);
+			t.SetNoPa(t.GetNoPa() - 1);
+			if (t.GetNoPa() == 1) {
 				break;
 			}
 		}
@@ -288,8 +289,9 @@ void SinglePlayer() {
 			t.GetPlayers()[CurrentPlayer]->SetBet(0);
 			t.GetPlayers()[CurrentPlayer]->SetActive(0);
 			t.GetPlayers()[CurrentPlayer]->SetMoney(0);
-			t.SetNoP(t.GetNoP() - 1);
-			if (t.GetNoP() == 1) {
+			t.SetNoPr(t.GetNoPr() - 1);
+			t.SetNoPa(t.GetNoPa() - 1);
+			if (t.GetNoPa() == 1) {
 				break;
 			}
 		}
@@ -310,99 +312,119 @@ void SinglePlayer() {
 			if (t.GetPlayers()[CurrentPlayer]->GetBet()) {
 				int maxmoney = GetMaxMoney(t);
 				if (t.GetPlayers()[CurrentPlayer]->GetIsPlayer()) {
-					int money = 0;
-					short ch = 0;
-					bool skip = false;
-					do
-					{
-						FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
-						Sleep(50);
-						t.PrintControls(ch, money);
-						switch (_getch()) {
-						case KEY_LEFT:
-							ch--;
-							if (ch < 1) { ch = 6; }
-							break;
-						case KEY_RIGHT:
-							ch++;
-							if (ch > 6) { ch = 1; }
-							break;
-						case '1':
-						case 'q':
-						case 'Q':
-							ch = 1;
-							break;
-						case '2':
-							ch = 2;
-							break;
-						case '3':
-							ch = 3;
-							break;
-						case '4':
-							ch = 4;
-							break;
-						case '5':
-							ch = 5;
-							break;
-						case '6':
-							ch = 6;
-							break;
-						case '\r':
-							ch = -ch;
-							break;
-						}
-						if (ch == -1) {
-							system("cls");
-							delete[] playerBets;
-							return;
-						}
-						else if (ch == -2) {
-							t.GetPlayers()[CurrentPlayer]->SetBet(0);
-							t.SetNoPr(t.GetNoPr() - 1);
-							skip = true;
-						}
-						else if (ch == -3) {
-							Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer]), CurrentPlayer);
-							skip = true;
-						}
-						else if (ch == -4) {
-							Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer] + money), CurrentPlayer);
-							skip = true;
-						}
-						else if (ch == -5) {
-							money -= 10;
-							if (money < 0) {
-								money = 0;
+					if ((playerBets[CurrentPlayer] + t.GetPlayers()[CurrentPlayer]->GetMoney()) > 0 || t.GetStage() > 1) {
+						int money = 0;
+						short ch = 0;
+						bool skip = false;
+						do
+						{
+							FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+							Sleep(50);
+							t.PrintControls(ch, money);
+							switch (_getch()) {
+							case KEY_LEFT:
+								ch--;
+								if (ch < 1) { ch = 6; }
+								break;
+							case KEY_RIGHT:
+								ch++;
+								if (ch > 6) { ch = 1; }
+								break;
+							case '1':
+							case 'q':
+							case 'Q':
+								ch = 1;
+								break;
+							case '2':
+								ch = 2;
+								break;
+							case '3':
+								ch = 3;
+								break;
+							case '4':
+								ch = 4;
+								break;
+							case '5':
+								ch = 5;
+								break;
+							case '6':
+								ch = 6;
+								break;
+							case '\r':
+								ch = -ch;
+								break;
 							}
-							ch = 5;
-						}
-						else if (ch == -6) {
-							money += 10;
-							if (money > maxmoney) {
-								money = maxmoney;
+							if (ch == -1) {
+								system("cls");
+								delete[] playerBets;
+								return;
 							}
-							ch = 6;
-						}
-					} while (skip == false);
-					t.DeleteControls();
+							else if (ch == -2) {
+								t.GetPlayers()[CurrentPlayer]->SetBet(0);
+								t.SetNoPr(t.GetNoPr() - 1);
+								skip = true;
+							}
+							else if (ch == -3) {
+								Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer]), CurrentPlayer);
+								skip = true;
+							}
+							else if (ch == -4) {
+								Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer] + money), CurrentPlayer);
+								skip = true;
+							}
+							else if (ch == -5) {
+								money -= 10;
+								if (money < 0) {
+									money = 0;
+								}
+								ch = 5;
+							}
+							else if (ch == -6) {
+								money += 10;
+								if (money > maxmoney) {
+									money = maxmoney;
+								}
+								ch = 6;
+							}
+						} while (skip == false);
+						t.DeleteControls();
+					}
+					else {
+						t.GetPlayers()[CurrentPlayer]->SetBet(0);
+						t.GetPlayers()[CurrentPlayer]->SetActive(0);
+						t.SetNoPr(t.GetNoPr() - 1);
+						t.SetNoPa(t.GetNoPa() - 1);
+						break;
+					}
 				}
 				else {
-					short ch = rand() % 10;
-					if (ch == 0) {
-						t.GetPlayers()[CurrentPlayer]->SetBet(0);
-						t.SetNoPr(t.GetNoPr() - 1);
-					}
-					else if (ch == 1 && t.GetPlayers()[CurrentPlayer]->GetMoney() >= 10) {
-						int randtmp = rand() % 5 + 1;
-						if (randtmp * 10 <= t.GetPlayers()[CurrentPlayer]->GetMoney() && randtmp <= maxmoney) {
-							Bet(t, playerBets, t.GetMaxBet() - playerBets[CurrentPlayer] + randtmp * 10, CurrentPlayer);
+					if ((playerBets[CurrentPlayer] + t.GetPlayers()[CurrentPlayer]->GetMoney()) > 0 || t.GetStage() > 1) {
+						short ch = rand() % 10;
+						if (ch == 0 && t.GetPlayers()[CurrentPlayer]->GetMoney() > 0) {
+							t.GetPlayers()[CurrentPlayer]->SetBet(0);
+							t.SetNoPr(t.GetNoPr() - 1);
+						}
+						else if (ch == 1 && t.GetPlayers()[CurrentPlayer]->GetMoney() >= 10) {
+							int randtmp = rand() % 5 + 1;
+							if (randtmp * 10 <= t.GetPlayers()[CurrentPlayer]->GetMoney() && randtmp <= maxmoney) {
+								Bet(t, playerBets, t.GetMaxBet() - playerBets[CurrentPlayer] + randtmp * 10, CurrentPlayer);
+							}
+							else {
+								Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer]), CurrentPlayer);
+							}
 						}
 						else {
 							Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer]), CurrentPlayer);
 						}
 					}
 					else {
-						Bet(t, playerBets, (t.GetMaxBet() - playerBets[CurrentPlayer]), CurrentPlayer);
+						t.GetPlayers()[CurrentPlayer]->SetBet(0);
+						t.GetPlayers()[CurrentPlayer]->SetActive(0);
+						t.SetNoPr(t.GetNoPr() - 1);
+						t.SetNoPa(t.GetNoPa() - 1);
+						if (t.GetNoPa() == 1) {
+							break;
+						}
 					}
 				}
 			}
