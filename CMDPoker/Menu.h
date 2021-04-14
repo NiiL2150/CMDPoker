@@ -145,7 +145,7 @@ void MenuChoice() {
 		else if (ch == -2) {
 			ch = 0;
 			SetConsoleTitle(_T("CMDPoker - MultiPlayer"));
-			//MultiPlayer();
+			MultiPlayer();
 		}
 		if (ch == 0) {
 			system("CLS");

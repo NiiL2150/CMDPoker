@@ -871,3 +871,171 @@ inline vector<Player*> Table::GetPlayers() const
 {
 	return players;
 }
+
+inline OnlineTable::OnlineTable(int _NoP, int _defaultMoney, vector<OnlinePlayer*> _players) {
+	players = _players;
+	NoP = _NoP;
+	NoPr = NoP;
+	NoPa = NoP;
+	pot = 0;
+	maxbet = 0;
+	dealer = 0;
+	stage = 1;
+	deck = new Card[52];
+	global = new Card[5];
+	StandardDeck();
+	Shuffle();
+	CardsInGame = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		global[i] = deck[51 - CardsInGame];
+		CardsInGame += 1;
+	}
+	for (int i = 0; i < NoP; i++)
+	{
+		Card tmpdeck[2] = { deck[51 - CardsInGame], deck[51 - CardsInGame - 1] };
+		CardsInGame += 2;
+		players[i]->SetHand(tmpdeck);
+	}
+}
+
+inline vector<OnlinePlayer*> OnlineTable::GetOnlinePlayers() const {
+	return players;
+}
+
+inline string OnlineTable::InfoToString(int _CurrentPlayer, int _played, int* _playerBets)
+{
+	string tmp = "";
+	tmp += char(NoP);
+	tmp += char(NoPr);
+	tmp += char(NoPa);
+	tmp += pot;
+	tmp += "-";
+	tmp += maxbet;
+	tmp += "-";
+	tmp += char(dealer);
+	tmp += char(stage);
+	tmp += char(deck[0].GetNumber());
+	tmp += char(deck[0].GetSuit());
+	tmp += char(deck[1].GetNumber());
+	tmp += char(deck[1].GetSuit());
+	tmp += char(deck[2].GetNumber());
+	tmp += char(deck[2].GetSuit());
+	tmp += char(deck[3].GetNumber());
+	tmp += char(deck[3].GetSuit());
+	tmp += char(deck[4].GetNumber());
+	tmp += char(deck[4].GetSuit());
+	for (int i = 0; i < NoP; i++)
+	{
+		tmp += char(players[i]->GetHand()[0].GetNumber());
+		tmp += char(players[i]->GetHand()[0].GetSuit());
+		tmp += char(players[i]->GetHand()[1].GetNumber());
+		tmp += char(players[i]->GetHand()[1].GetSuit());
+		tmp += players[i]->GetMoney();
+		tmp += "-";
+		tmp += char(players[i]->GetBet());
+		tmp += char(players[i]->GetActive());
+		tmp += players[i]->GetName();
+		tmp += "-";
+		tmp += players[i]->GetIP();
+		tmp += "-";
+	}
+	tmp += char(_CurrentPlayer);
+	tmp += char(_played);
+	for (int i = 0; i < NoP; i++)
+	{
+		tmp += _playerBets[i];
+		tmp += "-";
+	}
+	return tmp;
+}
+
+inline void OnlineTable::StringToInfo(string str, int& _CurrentPlayer, int& _played, int* _playerBets)
+{
+	string tmp = "";
+	int pos = 0;
+	
+	NoP = str[pos++];
+	NoPr = str[pos++];
+	NoPa = str[pos++];
+
+	while (str[pos] != '-') {
+		tmp += str[pos++];
+	}
+	pot = atoi(tmp.c_str());
+	tmp = "";
+	pos++;
+
+	while (str[pos] != '-') {
+		tmp += str[pos++];
+	}
+	maxbet = atoi(tmp.c_str());
+	tmp = "";
+	pos++;
+
+	while (str[pos] != '-') {
+		tmp += str[pos++];
+	}
+	pot = atoi(tmp.c_str());
+	tmp = "";
+	pos++;
+
+	dealer = str[pos++];
+	stage = str[pos++];
+
+	deck[0].SetNumber(str[pos++]);
+	deck[0].SetSuit(str[pos++]);
+	deck[1].SetNumber(str[pos++]);
+	deck[1].SetSuit(str[pos++]);
+	deck[2].SetNumber(str[pos++]);
+	deck[2].SetSuit(str[pos++]);
+	deck[3].SetNumber(str[pos++]);
+	deck[3].SetSuit(str[pos++]);
+	deck[4].SetNumber(str[pos++]);
+	deck[4].SetSuit(str[pos++]);
+
+	for (int i = 0; i < NoP; i++)
+	{
+		players[i]->GetHand()[0].SetNumber(str[pos++]);
+		players[i]->GetHand()[0].SetSuit(str[pos++]);
+		players[i]->GetHand()[1].SetNumber(str[pos++]);
+		players[i]->GetHand()[1].SetSuit(str[pos++]);
+
+		while (str[pos] != '-') {
+			tmp += str[pos++];
+		}
+		players[i]->SetMoney(atoi(tmp.c_str()));
+		tmp = "";
+		pos++;
+
+		players[i]->SetBet(str[pos++]);
+		players[i]->SetActive(str[pos++]);
+
+		while (str[pos] != '-') {
+			tmp += str[pos++];
+		}
+		players[i]->SetName(tmp.c_str());
+		tmp = "";
+		pos++;
+
+		while (str[pos] != '-') {
+			tmp += str[pos++];
+		}
+		players[i]->SetIP(tmp.c_str());
+		tmp = "";
+		pos++;
+	}
+
+	_CurrentPlayer = str[pos++];
+	_played = str[pos++];
+
+	for (int i = 0; i < NoP; i++)
+	{
+		while (str[pos] != '-') {
+			tmp += str[pos++];
+		}
+		_playerBets[i] = atoi(tmp.c_str());
+		tmp = "";
+		pos++;
+	}
+}

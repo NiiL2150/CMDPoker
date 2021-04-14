@@ -1,4 +1,6 @@
 #pragma once
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
@@ -8,6 +10,10 @@
 #include <vector>
 #include <tchar.h>
 #include <algorithm>
+#include <WinSock2.h>
+#pragma comment (lib, "Ws2_32.lib")
+#pragma comment (lib, "Mswsock.lib")
+#pragma comment (lib, "AdvApi32.lib")
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #define RESET   "\033[0m"
@@ -47,3 +53,4 @@
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_RIGHT 77
+using namespace std;

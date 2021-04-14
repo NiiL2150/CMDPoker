@@ -35,4 +35,9 @@ public:
 class OnlinePlayer : public Player {
 private:
 	string ip;
+public:
+	OnlinePlayer(string _name, int _money, string _ip);
+
+	string GetIP() const;
+	void SetIP(string _ip);
 };

@@ -15,6 +15,7 @@ protected:
 	int stage; //1-5
 	int CardsInGame; //Used cards from Card* deck
 public:
+	Table() {};
 	Table(int _NoP, int _defaultMoney, string name);
 	void StandardDeck();
 	void Shuffle();
@@ -52,4 +53,12 @@ public:
 class OnlineTable : public Table {
 private:
 	vector <OnlinePlayer*> players;
+public:
+	OnlineTable(int _NoP, int _defaultMoney, vector<OnlinePlayer*> _players);
+	OnlineTable() {}
+
+	vector<OnlinePlayer*> GetOnlinePlayers() const;
+
+	string InfoToString(int CurrentPlayer, int played, int* playerBets);
+	void StringToInfo(string str, int& CurrentPlayer, int& played, int* playerBets);
 };

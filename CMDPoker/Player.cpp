@@ -23,3 +23,8 @@ inline void Player::SetActive(bool _active) { active = _active; }
 
 inline bool Player::GetIsPlayer() const { return isPlayer; }
 inline void Player::SetIsPlayer(bool _isPlayer) { isPlayer = _isPlayer; }
+
+inline OnlinePlayer::OnlinePlayer(string _name, int _money, string _ip) : Player(_name, _money, 1), ip(_ip) {}
+
+inline string OnlinePlayer::GetIP() const { return ip; }
+inline void OnlinePlayer::SetIP(string _ip) { ip = _ip; }
