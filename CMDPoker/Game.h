@@ -704,7 +704,7 @@ void MultiPlayer() {
 		int NoP, defaultMoney, dealer = 0, CurrentPlayer = 0, played = 0;
 		string name;
 		GameSettings(NoP, name, defaultMoney);
-		int randomnum = rand() % 48127 + 1024;
+		int randomnum = rand() % 64512 + 1024;
 		SocketServer server(randomnum, NoP - 1);
 		int* playerBets = new int[NoP];
 		vector<OnlinePlayer*> _players;
