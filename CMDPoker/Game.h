@@ -704,11 +704,13 @@ void MultiPlayer() {
 		int NoP, defaultMoney, dealer = 0, CurrentPlayer = 0, played = 0;
 		string name;
 		GameSettings(NoP, name, defaultMoney);
-		SocketServer server(23456, NoP - 1);
+		int randomnum = rand() % 48127 + 1024;
+		SocketServer server(randomnum, NoP - 1);
 		int* playerBets = new int[NoP];
 		vector<OnlinePlayer*> _players;
 		vector<Socket*> s;
 		_players.push_back(new OnlinePlayer(name, defaultMoney, "0"));
+		cout << randomnum << endl << "1. " << name << endl;
 		for (int i = 1; i < NoP; i++)
 		{
 			Socket* stmp = server.Accept();
@@ -717,8 +719,10 @@ void MultiPlayer() {
 			s[i - 1]->SendLine(to_string(i));
 			_players.push_back(new OnlinePlayer(tmp, defaultMoney, to_string(i)));
 			s[i - 1]->SendLine(to_string(char(NoP)));
+			cout << i+1 << ". " << tmp << endl;
 		}
 		OnlineTable t = { NoP, defaultMoney, _players };
+		system("cls");
 		t.PrintTable();
 		while (t.GetNoPa() > 1)
 		{
@@ -876,9 +880,9 @@ void MultiPlayer() {
 						if ((playerBets[CurrentPlayer] + t.GetOnlinePlayers()[CurrentPlayer]->GetMoney()) > 0 || t.GetStage() > 1) {
 							string tmp, tmp3 = "";
 							tmp = s[CurrentPlayer - 1]->ReceiveLine();
-							int tmp2 = 0, pos = 0;
-							while (tmp[pos] != '-') {
-								tmp3 += tmp[pos++];
+							int tmp2 = 0, pos2 = 0;
+							while (tmp[pos2] != '-') {
+								tmp3 += tmp[pos2++];
 							}
 							tmp2 = atoi(tmp3.c_str());
 							if (tmp2 == 1) {
@@ -924,10 +928,6 @@ void MultiPlayer() {
 						playerBets[i] = 0;
 					}
 				}
-				for (int i = 0; i < NoP - 1; i++)
-				{
-					s[i]->SendLine(t.InfoToString(CurrentPlayer, played, playerBets));
-				}
 			}
 			if (t.GetNoPr() == 1) {
 				for (int i = 0; i < NoP; i++)
@@ -940,10 +940,6 @@ void MultiPlayer() {
 			}
 			else {
 				t.PrintDetails();
-				for (int i = 0; i < NoP - 1; i++)
-				{
-					s[i]->SendLine(t.InfoToString(CurrentPlayer, played, playerBets));
-				}
 				int* score = new int[NoP];
 				for (int i = 0; i < NoP; i++)
 				{
@@ -984,11 +980,6 @@ void MultiPlayer() {
 					t.SetPot(0);
 				}
 				t.PrintDetails();
-				for (int i = 0; i < NoP - 1; i++)
-				{
-					s[i]->SendLine(t.InfoToString(CurrentPlayer, played, playerBets));
-				}
-				Sleep(5000);
 			}
 		}
 		t.DeleteControls();
@@ -1010,14 +1001,15 @@ void MultiPlayer() {
 	}
 	else {
 		string name, ip, tmp, tmp2;
-		int place;
+		int place, portnum;
 		cin >> ip;
+		cin >> portnum;
 		cin >> name;
-		SocketClient s(ip, 23456);
+		SocketClient s(ip, portnum);
 		s.SendLine(name);
 		tmp = s.ReceiveLine();
 		place = tmp[0] - '0';
-		int NoP = 0, pos = 0;
+		int NoP = 0, pos2 = 0;
 		tmp = "";
 		tmp = s.ReceiveLine();
 		NoP = tmp[0] - '0';
@@ -1030,6 +1022,9 @@ void MultiPlayer() {
 			t.StringToInfo(tmp, CurrentPlayer, played, playerBets);
 			t.PrintCards();
 			t.PrintDetails();
+			if (t.GetNoPa() == 1) {
+				break;
+			}
 			if (CurrentPlayer == place && t.GetOnlinePlayers()[CurrentPlayer]->GetBet()) {
 				int money = 0;
 				short ch = 0;
